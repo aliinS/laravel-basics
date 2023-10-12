@@ -1,5 +1,9 @@
 <?php
 
+use App\Models\Author;
+use App\Models\Client;
+use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +19,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+route::get('/test', function(){
+    // siia kirjuta misiganes
+    // return Author::first()->books;
+    // dd('Author::with('books')->first');
+    //dd('tere');
+    //return Client::first()->orders;
+    //return Order::first()->client;
 });
