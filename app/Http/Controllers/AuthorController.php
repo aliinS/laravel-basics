@@ -12,7 +12,11 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        //
+        return view('authors.index', [
+            'authors' => Author::all()
+        ]);
+
+        return Author::paginate(10);
     }
 
     /**

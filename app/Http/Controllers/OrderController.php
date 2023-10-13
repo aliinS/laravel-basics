@@ -12,8 +12,13 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        return view('orders.index', [
+            'orders' => Order::all()
+        ]);
+
+        return Order::paginate(10);
     }
+    
 
     /**
      * Show the form for creating a new resource.
