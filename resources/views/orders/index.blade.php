@@ -13,9 +13,15 @@
                         @foreach ($orders as $order)
                         <li>
                             <div class="flex border-b justify-between items-center">
-                                <p>{{ $order->delivery_address }} {{ $order->order_date }}</p>
+                                <div class="flex flex-col">
+                                    <p class="font-bold">Delivery address:</p>
+                                    <p>{{ $order->delivery_address }} </p>
+                                    <p class="font-bold">Order date:</p>
+                                    <p>{{ $order->order_date }}</p>
+                                    <p class="font-bold">Status:</p>
+                                    <p>{{ $order->status }}</p>
+                                </div>
                                 <div class="grid grid-cols-2 gap-2 pt-2">
-                                    <x-primary-button>Edit</x-primary-button>
                                     <x-danger-button>Delete</x-danger-button>
                                 </div>
 
@@ -25,6 +31,7 @@
                         @endforeach
                     </ul>
                 </div>
+                {{$orders}}
             </div>
         </div>
     </div>

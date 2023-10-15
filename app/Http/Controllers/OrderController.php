@@ -13,10 +13,8 @@ class OrderController extends Controller
     public function index()
     {
         return view('orders.index', [
-            'orders' => Order::all()
+            'orders' => Order::paginate(10)
         ]);
-
-        return Order::paginate(10);
     }
     
 

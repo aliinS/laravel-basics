@@ -13,7 +13,16 @@
                         @foreach ($clients as $client)
                         <li>
                             <div class="flex border-b justify-between items-center">
-                                <p>{{ $client->username }} {{ $client->first_name }} {{ $client->last_name }} {{ $client->email }}</p>
+                                <div class="flex flex-col">
+                                    <p class="font-bold">Username:</p>
+                                    <p>{{ $client->username }} </p>
+                                    <p class="font-bold">Name:</p>
+                                    <p>{{ $client->first_name }} {{ $client->last_name }} </p>
+                                    <p class="font-bold">Address:</p>
+                                    <p>{{ $client->address }} </p>
+                                    <p class="font-bold">Email:</p>
+                                    <p>{{ $client->email }}</p>
+                                </div>    
                                 <div class="grid grid-cols-2 gap-2 pt-2">
                                     <x-primary-button>Edit</x-primary-button>
                                     <x-danger-button>Delete</x-danger-button>
@@ -25,6 +34,7 @@
                         @endforeach
                     </ul>
                 </div>
+                {{$clients}}
             </div>
         </div>
     </div>
