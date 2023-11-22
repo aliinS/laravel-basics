@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Authors') }}
+            {{ __('Clients') }}
         </h2>
     </x-slot>
 
@@ -25,7 +25,13 @@
                                 </div>    
                                 <div class="grid grid-cols-2 gap-2 pt-2">
                                     <x-primary-button>Edit</x-primary-button>
-                                    <x-danger-button>Delete</x-danger-button>
+                                    <form method="POST" action="{{ route('clients.destroy', $client) }}">
+                                        @csrf
+                                        @method('delete')
+                                        <x-danger-button onclick="event.preventDefault(); this.closest('form').submit();">
+                                            delete
+                                        </x-danger-button>
+                                    </form>
                                 </div>
 
                             </div>

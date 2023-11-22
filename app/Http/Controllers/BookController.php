@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
 use App\Models\Book;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -38,25 +41,43 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Book $book)
+    public function show(Book $book): View
     {
-        //
+        return view('books.show', [
+            'book' => $book,
+            'authors' => $book->authors
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Book $book)
+    public function edit(Book $book): View
     {
-        //
+        return view('books.edit', [
+            'book' => $book,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request, Book $book): RedirectResponse
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'release_date' => 'required|integer|between:1901,2155',
+            'price' => ['required', 'regex:/^\d+(,\d|,\d{2})?$/i'],
+            'type' => 'required',
+        ],
+        [
+            'release_date.required' => 'The release year field is required.',
+            'release_date.between' => 'The release year field must be between 1901 and 2155.', 
+        ]);
+
+        $book->update($validated);
+ 
+        return redirect(route('books.index'));
     }
 
     /**
@@ -64,6 +85,16 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
+        return redirect('/books');
+    }
+
+    /**
+     * Edit author in book editing.
+     */
+    public function detachAuthor(Author $author)
+    {
+        $author->delete();
+        return redirect('/books');
     }
 }
